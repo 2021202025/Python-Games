@@ -1,5 +1,6 @@
 import pygame
 import time
+import random
 
 pygame.init()
 
@@ -16,14 +17,6 @@ pygame.display.set_caption('Snakie')
 
 #pygame.display.flip()
 
-
-gameExit = False
-
-lead_x = display_width/2
-lead_y = display_height/2
-lead_x_change = 0
-lead_y_change = 0
-
 clock = pygame.time.Clock()
 
 block_size = 15
@@ -34,45 +27,72 @@ font = pygame.font.SysFont(None, 32)
 
 def message_to_screen(msg,color):
     screen_text = font.render(msg, True, color)
-    gameDisplay.blit(screen_text, [display_width/2-100, display_height/2-100])
+    gameDisplay.blit(screen_text, [display_width/2-250, display_height/2-100])
 
-while not gameExit:
-    for event in pygame.event.get():
-        print(event)
-        if event.type == pygame.QUIT:
-            gameExit = True
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_LEFT:
-                lead_x_change = -block_size/5
-                lead_y_change = 0
-            elif event.key == pygame.K_RIGHT:
-                lead_x_change = block_size/5
-                lead_y_change = 0
-            elif event.key == pygame.K_UP:
-                lead_y_change = -block_size/5
-                lead_x_change = 0    
-            elif event.key == pygame.K_DOWN:
-                lead_y_change = block_size/5
-                lead_x_change = 0
-            
-                
-    if lead_x >= display_width or lead_x < 0 or lead_y >= display_height or lead_y < 0:
-        gameExit=True
-                
-    lead_x += lead_x_change
-    lead_y += lead_y_change
+def gameLoop():
     
-    gameDisplay.fill(black)
-    pygame.draw.rect(gameDisplay, red, [lead_x,lead_y,block_size,block_size])
+    gameExit = False
+    gameOver = False
 
-    #gameDisplay.fill(red, rect=[200,200,50,10])
+    lead_x = display_width/2
+    lead_y = display_height/2
+    lead_x_change = 0
+    lead_y_change = 0
 
-    pygame.display.update()
+    randAppleX = random.randrange(0, display_width-block_size)
+    randAppleY = random.randrange(0, display_height-block_size)
     
-    clock.tick(FPS)
+    while not gameExit:
+        while gameOver == True:
+            gameDisplay.fill(black)
+            message_to_screen("You Lost, Press C to play again or Q to quit", white)
+            pygame.display.update()
 
-message_to_screen("Game Over", red)
-pygame.display.update()
-time.sleep(2)
-pygame.quit()
-quit()
+            for event in pygame.event.get():
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_q:
+                        gameExit = True
+                        gameOver = False
+
+                    if event.key == pygame.K_c:
+                        gameLoop()
+                        
+        for event in pygame.event.get():
+            print(event)
+            if event.type == pygame.QUIT:
+                gameExit = True
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_LEFT:
+                    lead_x_change = -block_size/5
+                    lead_y_change = 0
+                elif event.key == pygame.K_RIGHT:
+                    lead_x_change = block_size/5
+                    lead_y_change = 0
+                elif event.key == pygame.K_UP:
+                    lead_y_change = -block_size/5
+                    lead_x_change = 0    
+                elif event.key == pygame.K_DOWN:
+                    lead_y_change = block_size/5
+                    lead_x_change = 0
+                
+                    
+        if lead_x >= display_width or lead_x < 0 or lead_y >= display_height or lead_y < 0:
+            gameOver=True
+                    
+        lead_x += lead_x_change
+        lead_y += lead_y_change
+        
+        gameDisplay.fill(black)
+        pygame.draw.rect(gameDisplay, blue, [randAppleX, randAppleY, block_size, block_size])
+        pygame.draw.rect(gameDisplay, red, [lead_x,lead_y,block_size,block_size])
+
+        #gameDisplay.fill(red, rect=[200,200,50,10])
+
+        pygame.display.update()
+        
+        clock.tick(FPS)
+
+    pygame.quit()
+    quit()
+
+gameLoop()
