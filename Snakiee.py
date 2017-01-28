@@ -34,17 +34,21 @@ while not gameExit:
             elif event.key == pygame.K_RIGHT:
                 lead_x_change = 2
                 lead_y_change = 0
+            elif event.key == pygame.K_UP:
+                lead_y_change = -2
+                lead_x_change = 0    
             elif event.key == pygame.K_DOWN:
                 lead_y_change = 2
                 lead_x_change = 0
-            elif event.key == pygame.K_UP:
-                lead_y_change = -2
-                lead_x_change = 0
+            
+                
+    if lead_x >= 800 or lead_x < 0 or lead_y >= 600 or lead_y < 0:
+        gameExit=True
                 
     lead_x += lead_x_change
     lead_y += lead_y_change
     
-    gameDisplay.fill(white)
+    gameDisplay.fill(black)
     pygame.draw.rect(gameDisplay, red, [lead_x,lead_y,10,10])
 
     #gameDisplay.fill(red, rect=[200,200,50,10])
