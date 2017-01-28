@@ -15,17 +15,23 @@ pygame.display.set_caption('Snakie')
 
 gameExit = False
 
+lead_x = 300
+lead_y = 300
+
 while not gameExit:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             gameExit = True
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_LEFT:
+                lead_x -= 10
+            if event.key == pygame.K_RIGHT:
+                lead_x += 10
         print(event)
     gameDisplay.fill(white)
-    pygame.draw.rect(gameDisplay, black, [400,300,10,50])
-    pygame.draw.rect(gameDisplay, red, [400,300,10,10])
-    pygame.draw.rect(gameDisplay, blue, [400,300,10,4])
+    pygame.draw.rect(gameDisplay, red, [lead_x,lead_y,10,10])
 
-    gameDisplay.fill(red, rect=[200,200,50,10])
+    #gameDisplay.fill(red, rect=[200,200,50,10])
 
     
     pygame.display.update()
