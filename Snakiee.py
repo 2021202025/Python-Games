@@ -21,7 +21,7 @@ clock = pygame.time.Clock()
 
 block_size = 10
 
-FPS = 60
+FPS = 15
 
 font = pygame.font.SysFont(None, 32)
 
@@ -39,8 +39,8 @@ def gameLoop():
     lead_x_change = 0
     lead_y_change = 0
 
-    randAppleX = round(random.randrange(0, display_width-block_size/10.0)*10.0)
-    randAppleY = round(random.randrange(0, display_height-block_size/10.0)*10.0)
+    randAppleX = round(random.randrange(0, display_width-block_size)/10.0)*10.0
+    randAppleY = round(random.randrange(0, display_height-block_size)/10.0)*10.0
     
     while not gameExit:
         while gameOver == True:
@@ -63,16 +63,16 @@ def gameLoop():
                 gameExit = True
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
-                    lead_x_change = -block_size/5
+                    lead_x_change = -block_size
                     lead_y_change = 0
                 elif event.key == pygame.K_RIGHT:
-                    lead_x_change = block_size/5
+                    lead_x_change = block_size
                     lead_y_change = 0
                 elif event.key == pygame.K_UP:
-                    lead_y_change = -block_size/5
+                    lead_y_change = -block_size
                     lead_x_change = 0    
                 elif event.key == pygame.K_DOWN:
-                    lead_y_change = block_size/5
+                    lead_y_change = block_size
                     lead_x_change = 0
                 
                     
@@ -81,7 +81,7 @@ def gameLoop():
                     
         lead_x += lead_x_change
         lead_y += lead_y_change
-        
+
         gameDisplay.fill(black)
         pygame.draw.rect(gameDisplay, blue, [randAppleX, randAppleY, block_size, block_size])
         pygame.draw.rect(gameDisplay, red, [lead_x,lead_y,block_size,block_size])
@@ -89,6 +89,9 @@ def gameLoop():
         #gameDisplay.fill(red, rect=[200,200,50,10])
 
         pygame.display.update()
+
+        if lead_x == randAppleX and lead_y == randAppleY:
+            print("Nom Nom")
         
         clock.tick(FPS)
 
