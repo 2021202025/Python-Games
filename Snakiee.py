@@ -19,7 +19,7 @@ pygame.display.set_caption('Snakie')
 
 clock = pygame.time.Clock()
 
-block_size = 15
+block_size = 10
 
 FPS = 60
 
@@ -39,8 +39,8 @@ def gameLoop():
     lead_x_change = 0
     lead_y_change = 0
 
-    randAppleX = random.randrange(0, display_width-block_size)
-    randAppleY = random.randrange(0, display_height-block_size)
+    randAppleX = round(random.randrange(0, display_width-block_size/10.0)*10.0)
+    randAppleY = round(random.randrange(0, display_height-block_size/10.0)*10.0)
     
     while not gameExit:
         while gameOver == True:
