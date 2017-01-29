@@ -25,8 +25,9 @@ FPS = 15
 
 font = pygame.font.SysFont(None, 32)
 
-def snake(lead_x,lead_y,block_size):
-    pygame.draw.rect(gameDisplay, red, [lead_x,lead_y,block_size,block_size])
+def snake(block_size, snakelist):
+    for XnY in snakelist:
+        pygame.draw.rect(gameDisplay, red, [XnY[0], XnY[1], block_size, block_size])
     
 def message_to_screen(msg,color):
     screen_text = font.render(msg, True, color)
@@ -90,7 +91,14 @@ def gameLoop():
 
         #gameDisplay.fill(red, rect=[200,200,50,10])
 
-        snake(lead_x,lead_y,block_size)
+        snakelist = []
+        snakeHead = []
+        snakeHead.append(lead_x)
+        snakeHead.append(lead_y)
+        snakelist.append(snakeHead)
+        
+        snake(block_size, snakelist)
+        
         pygame.display.update()
 
         if lead_x == randAppleX and lead_y == randAppleY:
