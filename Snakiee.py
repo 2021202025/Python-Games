@@ -19,7 +19,7 @@ pygame.display.set_caption('Snakie')
 
 clock = pygame.time.Clock()
 
-block_size = 15
+block_size = 20
 
 FPS = 15
 
@@ -68,7 +68,7 @@ def gameLoop():
                         gameLoop()
                         
         for event in pygame.event.get():
-            print(event)
+            #print(event)
             if event.type == pygame.QUIT:
                 gameExit = True
             if event.type == pygame.KEYDOWN:
@@ -121,13 +121,15 @@ def gameLoop():
 ##             randAppleY = round(random.randrange(0, display_height-block_size)/10.0)*10.0
 ##             snakeLength +=1
 
-        if lead_x >= randAppleX and lead_x <= randAppleX + AppleThickness:
-            if lead_y >= randAppleY and lead_y <= randAppleY + AppleThickness:
-                 randAppleX = round(random.randrange(0, display_width-block_size)/10.0)*10.0
-                 randAppleY = round(random.randrange(0, display_height-block_size)/10.0)*10.0
-                 snakeLength +=1                
+##        if lead_x >= randAppleX and lead_x <= randAppleX + AppleThickness:
+##            if lead_y >= randAppleY and lead_y <= randAppleY + AppleThickness:
+##                 randAppleX = round(random.randrange(0, display_width-block_size)/10.0)*10.0
+##                 randAppleY = round(random.randrange(0, display_height-block_size)/10.0)*10.0
+##                 snakeLength +=1
+##
 
-            
+        if lead_x > randAppleX and lead_x < randAppleX + AppleThickness or lead_x + block_size > randAppleX and lead_x + block_size < randAppleX + AppleThickness:
+            print("X crossover")
         
         clock.tick(FPS)
 
