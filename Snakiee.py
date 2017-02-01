@@ -15,18 +15,23 @@ display_height = 600
 gameDisplay = pygame.display.set_mode((display_width,display_height))
 pygame.display.set_caption('Snakie')
 
+img = pygame.image.load('Snakiee2.png')
+
 #pygame.display.flip()
 
 clock = pygame.time.Clock()
 
-block_size = 20
+block_size = 15
 
 FPS = 15
 
 font = pygame.font.SysFont(None, 32)
 
 def snake(block_size, snakelist):
-    for XnY in snakelist:
+    
+    gameDisplay.blit(img, (snakelist[-1][0], snakelist[-1][1]))
+    
+    for XnY in snakelist[:-1]:
         pygame.draw.rect(gameDisplay, red, [XnY[0], XnY[1], block_size, block_size])
 
 def text_objects(text,color):
@@ -101,7 +106,7 @@ def gameLoop():
 
         gameDisplay.fill(black)
 
-        AppleThickness = 30
+        AppleThickness = 20
         pygame.draw.rect(gameDisplay, blue, [randAppleX, randAppleY, AppleThickness, AppleThickness])
 
         #gameDisplay.fill(red, rect=[200,200,50,10])
