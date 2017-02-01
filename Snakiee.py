@@ -8,6 +8,7 @@ white = (255,255,255)
 red = (255,0,0)
 black = (0,0,0)
 blue = (0,0,255)
+yellow = (255,242,0)
 
 display_width = 800
 display_height = 600
@@ -23,13 +24,27 @@ clock = pygame.time.Clock()
 
 block_size = 15
 
-FPS = 15
+FPS = 10
+
+direction = "right"
 
 font = pygame.font.SysFont(None, 32)
 
 def snake(block_size, snakelist):
+
+    if direction == "right":
+        head = pygame.transform.rotate(img, 270)
+
+    if direction == "left":
+        head = pygame.transform.rotate(img, 90)
+
+    if direction == "up":
+        head = pygame.transform.rotate(img, 0)
+
+    if direction == "down":
+        head = pygame.transform.rotate(img, 180)    
     
-    gameDisplay.blit(img, (snakelist[-1][0], snakelist[-1][1]))
+    gameDisplay.blit(head, (snakelist[-1][0], snakelist[-1][1]))
     
     for XnY in snakelist[:-1]:
         pygame.draw.rect(gameDisplay, red, [XnY[0], XnY[1], block_size, block_size])
@@ -46,13 +61,13 @@ def message_to_screen(msg,color):
     gameDisplay.blit(textSurf, textRect)
 
 def gameLoop():
-    
+    global direction
     gameExit = False
     gameOver = False
 
     lead_x = display_width/2
     lead_y = display_height/2
-    lead_x_change = 0
+    lead_x_change = 10
     lead_y_change = 0
     
     snakelist = []
@@ -64,7 +79,7 @@ def gameLoop():
     while not gameExit:
         while gameOver == True:
             gameDisplay.fill(black)
-            message_to_screen("You Lost, Press C to play again or Q to quit", white)
+            message_to_screen("You Lost, Press C to play again or Q to quit", yellow)
             pygame.display.update()
 
             for event in pygame.event.get():
@@ -85,15 +100,19 @@ def gameLoop():
                 gameExit = True
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
+                    direction = 'left'
                     lead_x_change = -block_size
                     lead_y_change = 0
                 elif event.key == pygame.K_RIGHT:
+                    direction = 'right'
                     lead_x_change = block_size
                     lead_y_change = 0
                 elif event.key == pygame.K_UP:
+                    direction = 'up'
                     lead_y_change = -block_size
                     lead_x_change = 0    
                 elif event.key == pygame.K_DOWN:
+                    direction = 'down'
                     lead_y_change = block_size
                     lead_x_change = 0
                 
