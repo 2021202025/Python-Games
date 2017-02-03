@@ -32,6 +32,18 @@ smallfont = pygame.font.SysFont("comicsansms", 28)
 medfont = pygame.font.SysFont("comicsansms", 40)
 largefont = pygame.font.SysFont("comicsansms", 80)
 
+def game_intro():
+
+    intro = True
+
+    while intro:
+        gameDisplay.fill(black)
+        message_to_screen("Snakie", red, -100, "large")
+        message_to_screen("Use Arrow Keys to Move the Snake", yellow, -25, "medium")
+        message_to_screen("Eat Apples to increase Score", yellow, 20, "medium")
+
+        pygame.display.update()
+
 def snake(block_size, snakelist):
 
     if direction == "right":
@@ -55,7 +67,7 @@ def text_objects(text,color,size):
     if size == "small":
         textSurface = smallfont.render(text, True, color)
     elif size == "medium":
-        textSurface = mediumfont.render(text, True, color)
+        textSurface = medfont.render(text, True, color)
     elif size == "large":
         textSurface = largefont.render(text, True, color)
         
@@ -140,7 +152,7 @@ def gameLoop():
 
         gameDisplay.fill(black)
 
-        AppleThickness = 20
+        AppleThickness = 16
         pygame.draw.rect(gameDisplay, blue, [randAppleX, randAppleY, AppleThickness, AppleThickness])
 
         #gameDisplay.fill(red, rect=[200,200,50,10])
@@ -190,5 +202,7 @@ def gameLoop():
 
     pygame.quit()
     quit()
+    
+game_intro()
 
 gameLoop()
