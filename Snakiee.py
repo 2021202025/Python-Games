@@ -28,7 +28,7 @@ FPS = 10
 
 direction = "right"
 
-smallfont = pygame.font.SysFont("comicsansms", 24)
+smallfont = pygame.font.SysFont("comicsansms", 28)
 medfont = pygame.font.SysFont("comicsansms", 40)
 largefont = pygame.font.SysFont("comicsansms", 80)
 
@@ -59,10 +59,9 @@ def text_objects(text,color,size):
     elif size == "large":
         textSurface = largefont.render(text, True, color)
         
-    textSurface = font.render(text, True, color)
     return textSurface, textSurface.get_rect()
     
-def message_to_screen(msg,color, y_displace=0):
+def message_to_screen(msg,color, y_displace=0, size = "small"):
     textSurf, textRect = text_objects(msg, color, size)
     #screen_text = font.render(msg, True, color)
     #gameDisplay.blit(screen_text, [display_width/2-250, display_height/2-100])
