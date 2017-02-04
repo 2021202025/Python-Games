@@ -39,6 +39,36 @@ smallfont = pygame.font.SysFont("comicsansms", 28)
 medfont = pygame.font.SysFont("comicsansms", 40)
 largefont = pygame.font.SysFont("comicsansms", 80)
 
+def pause():
+
+    paused = True
+
+    while paused:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_c:
+                    paused = False
+
+                elif event.key == pygame.K_q:
+                    pygame.quit()
+                    quit()
+                
+
+        gameDisplay.fill(black)
+        message_to_screen("Paused",
+                          blue,
+                          -100,
+                          size="large")
+        message_to_screen("Press c to continue or q to Quit",
+                          yellow,
+                          0)
+        pygame.display.update()
+        clock.tick(5)
+
 def score(score):
     text = smallfont.render("Score: "+str(score), True, white)
     gameDisplay.blit(text, [0,0])
@@ -73,7 +103,7 @@ def game_intro():
         message_to_screen("Snakie", red, -100, "large")
         message_to_screen("Use Arrow Keys to Move the Snake", yellow, -25, "medium")
         message_to_screen("Eat Apples to increase Score", yellow, 20, "medium")
-        message_to_screen("Press C to play or Q to quit", blue, 100, "medium")
+        message_to_screen("Press C to play and P to pause Q to quit", blue, 100, "medium")
 
         pygame.display.update()
 
@@ -177,6 +207,9 @@ def gameLoop():
                     direction = 'down'
                     lead_y_change = block_size
                     lead_x_change = 0
+
+                elif event.key == pygame.K_p:
+                    pause()
                 
                     
         if lead_x >= display_width or lead_x < 0 or lead_y >= display_height or lead_y < 0:
