@@ -39,6 +39,10 @@ smallfont = pygame.font.SysFont("comicsansms", 28)
 medfont = pygame.font.SysFont("comicsansms", 40)
 largefont = pygame.font.SysFont("comicsansms", 80)
 
+def score(score):
+    text = smallfont.render("Score: "+str(score), True, white)
+    gameDisplay.blit(text, [0,0])
+
 def randAppleGen():
     randAppleX = round(random.randrange(0, display_width-block_size))#/10.0)*10.0
     randAppleY = round(random.randrange(0, display_height-block_size))#/10.0)*10.0
@@ -129,6 +133,7 @@ def gameLoop():
     while not gameExit:
         while gameOver == True:
             gameDisplay.fill(black)
+            score(snakeLength-1)
             message_to_screen("Game Over",
                               yellow,
                               -50,
@@ -204,6 +209,8 @@ def gameLoop():
                 gameOver = True
             
         snake(block_size, snakelist)
+
+        score(snakeLength-1)
         
         pygame.display.update()
 
