@@ -57,7 +57,8 @@ def pause():
                     pygame.quit()
                     quit()
                 
-
+#To show the actual screen while paused just take the following text out of While loop or comment it out
+                    
         gameDisplay.fill(black)
         message_to_screen("Paused",
                           blue,
