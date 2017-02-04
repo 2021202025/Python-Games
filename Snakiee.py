@@ -9,6 +9,7 @@ red = (255,0,0)
 black = (0,0,0)
 blue = (0,0,255)
 yellow = (255,242,0)
+green = (0,200,0)
 
 display_width = 800
 display_height = 600
@@ -17,6 +18,7 @@ gameDisplay = pygame.display.set_mode((display_width,display_height))
 pygame.display.set_caption('Snakie')
 
 img = pygame.image.load('Snakiee3.png')
+appleimg = pygame.image.load('Apple.png')
 
 #pygame.display.flip()
 
@@ -75,7 +77,7 @@ def snake(block_size, snakelist):
     gameDisplay.blit(head, (snakelist[-1][0], snakelist[-1][1]))
     
     for XnY in snakelist[:-1]:
-        pygame.draw.rect(gameDisplay, red, [XnY[0], XnY[1], block_size, block_size])
+        pygame.draw.rect(gameDisplay, green, [XnY[0], XnY[1], block_size, block_size])
 
 def text_objects(text,color,size):
     if size == "small":
@@ -169,9 +171,12 @@ def gameLoop():
         gameDisplay.fill(black)
 
         AppleThickness = 21
-        pygame.draw.rect(gameDisplay, blue, [randAppleX, randAppleY, AppleThickness, AppleThickness])
+        #pygame.draw.rect(gameDisplay, blue, [randAppleX, randAppleY, AppleThickness, AppleThickness])
 
         #gameDisplay.fill(red, rect=[200,200,50,10])
+
+
+        gameDisplay.blit(appleimg, (randAppleX, randAppleY))
 
         
         snakeHead = []
