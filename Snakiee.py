@@ -17,13 +17,18 @@ display_height = 600
 gameDisplay = pygame.display.set_mode((display_width,display_height))
 pygame.display.set_caption('Snakie')
 
+#icon = pygame.image.load('filename')
+#pygame.display.set_icon(icon)
+
 img = pygame.image.load('Snakiee3.png')
 appleimg = pygame.image.load('Apple.png')
 
 #pygame.display.flip()
 
 clock = pygame.time.Clock()
-5
+
+AppleThickness = 21
+
 block_size = 20
 
 FPS = 10
@@ -111,8 +116,8 @@ def gameLoop():
     snakelist = []
     snakeLength = 1
 
-    randAppleX = round(random.randrange(0, display_width-block_size)/10.0)*10.0
-    randAppleY = round(random.randrange(0, display_height-block_size)/10.0)*10.0
+    randAppleX = round(random.randrange(0, display_width- 30))#/10.0)*10.0
+    randAppleY = round(random.randrange(0, display_height- 30))#/10.0)*10.0
     
     while not gameExit:
         while gameOver == True:
@@ -170,7 +175,7 @@ def gameLoop():
 
         gameDisplay.fill(black)
 
-        AppleThickness = 21
+        
         #pygame.draw.rect(gameDisplay, blue, [randAppleX, randAppleY, AppleThickness, AppleThickness])
 
         #gameDisplay.fill(red, rect=[200,200,50,10])
