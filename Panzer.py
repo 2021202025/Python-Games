@@ -19,6 +19,9 @@ white = (255,255,255)
 black = (0,0,0)
 red = (255,0,0)
 green = (34,177,76)
+yellow = (255,242,0)
+blue = (0,0,255)
+
 clock = pygame.time.Clock()
 
 smallfont = pygame.font.SysFont("comicsansms", 25)
@@ -97,7 +100,16 @@ def game_intro():
         message_to_screen("The objective is to shoot and destroy",black,-30)
         message_to_screen("the enemy tank before they destroy you.",black,10)
         message_to_screen("The more enemies you destroy, the harder they get.",black,50)
-        message_to_screen("Press C to play, P to pause or Q to quit",black,180)
+        #message_to_screen("Press C to play, P to pause or Q to quit",black,180)
+
+        pygame.draw.rect(gameDisplay, red, (150,500,100,50))
+
+        pygame.draw.rect(gameDisplay, yellow, (350,500,100,50))
+
+        pygame.draw.rect(gameDisplay, blue, (550,500,100,50))
+
+
+
         pygame.display.update()
 
         clock.tick(15)
