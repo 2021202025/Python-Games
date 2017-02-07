@@ -21,7 +21,10 @@ red = (255,0,0)
 green = (34,177,76)
 yellow = (255,242,0)
 blue = (0,0,255)
+light_blue = (0,100,255)
 light_red = (255,66,0)
+light_green = (230
+               ,255,0)
 
 clock = pygame.time.Clock()
 
@@ -115,10 +118,15 @@ def game_intro():
         else:
             pygame.draw.rect(gameDisplay, red, (150,500,100,50))
 
-            
-        pygame.draw.rect(gameDisplay, yellow, (350,500,100,50))
-
-        pygame.draw.rect(gameDisplay, blue, (550,500,100,50))
+        if 350+100 > cur[0] > 350 and 500+50 > cur[1] > 500:
+            pygame.draw.rect(gameDisplay, light_green, (350,500,100,50))
+        else:
+            pygame.draw.rect(gameDisplay, yellow, (350,500,100,50))
+        
+        if 550+100 > cur[0] > 550 and 500+50 > cur[1] >500:
+            pygame.draw.rect(gameDisplay, light_blue, (550,500,100,50))
+        else:
+            pygame.draw.rect(gameDisplay, blue, (550,500,100,50))
         
         text_to_button("Play", black, 150,500,100,50)
         text_to_button("Controls", black, 350,500,100,50)
