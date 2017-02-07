@@ -22,6 +22,8 @@ pygame.draw.circle(gameDisplay, red, (200,200), 100)
 
 pygame.draw.rect(gameDisplay, black, (150,150,200,100))
 
+pygame.draw.polygon(gameDisplay, white, ((140,5), (200,19), (64,78),(301,400)))
+
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
