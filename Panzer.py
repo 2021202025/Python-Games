@@ -21,6 +21,7 @@ red = (255,0,0)
 green = (34,177,76)
 yellow = (255,242,0)
 blue = (0,0,255)
+light_red = (255,66,0)
 
 clock = pygame.time.Clock()
 
@@ -107,8 +108,14 @@ def game_intro():
         message_to_screen("The more enemies you destroy, the harder they get.",black,50)
         #message_to_screen("Press C to play, P to pause or Q to quit",black,180)
 
-        pygame.draw.rect(gameDisplay, red, (150,500,100,50))
+        cur = pygame.mouse.get_pos()
 
+        if 150+100 > cur[0] > 150 and 500+50 > cur[1] > 500:
+            pygame.draw.rect(gameDisplay, light_red, (150,500,100,50))
+        else:
+            pygame.draw.rect(gameDisplay, red, (150,500,100,50))
+
+            
         pygame.draw.rect(gameDisplay, yellow, (350,500,100,50))
 
         pygame.draw.rect(gameDisplay, blue, (550,500,100,50))
