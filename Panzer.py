@@ -34,6 +34,9 @@ mainTankY = display_height * 0.9
 tankWidth = 40
 tankHeight = 20
 
+turretWidth = 7
+wheelWidth = 5
+
 smallfont = pygame.font.SysFont("comicsansms", 25)
 medfont = pygame.font.SysFont("comicsansms", 50)
 largefont = pygame.font.SysFont("comicsansms", 85)
@@ -71,9 +74,10 @@ def message_to_screen(msg,color, y_displace = 0, size = "small"):
 def tank(x,y):
     x = int(x)
     y = int(y)
-    pygame.draw.circle(gameDisplay, light_red, ((x),(y)),int(tankHeight/2))
+    pygame.draw.circle(gameDisplay, black, ((x),(y)),int(tankHeight/2))
     pygame.draw.rect(gameDisplay, black, (x-tankHeight, y, tankWidth, tankHeight))
-
+    
+    pygame.draw.line(gameDisplay, black, (x,y), (x-20, y-20), turretWidth)
 
 def game_controls():
     
