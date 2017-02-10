@@ -62,6 +62,32 @@ def message_to_screen(msg,color, y_displace = 0, size = "small"):
     textRect.center = (int(display_width / 2), int(display_height / 2)+y_displace)
     gameDisplay.blit(textSurf, textRect)
 
+def game_controls():
+    
+     gcont = True
+
+     while gcont:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+
+
+        gameDisplay.fill(white)
+        message_to_screen("Controls!",green,-100,size="large")
+        message_to_screen("Fire: Spacebar",black,-30)
+        message_to_screen("Move Turret: Up and Down Arrows",black,10)
+        message_to_screen("Move Tank: Left and right Arrows",black,50)
+        message_to_screen("Pause: P",black,80)
+
+        button("Play", 150,500,100,50, red, light_red, action="play")
+        button("Controls", 350,500,100,50,yellow, light_green, action="controls" )
+        button("Quit", 550,500,100,50, blue, light_blue, action="quit")
+
+
+        pygame.display.update()
+
+        clock.tick(15)
 def button(text, x, y, width, height,inactive_color, active_color, action = None):
     cur = pygame.mouse.get_pos()
 
@@ -70,8 +96,16 @@ def button(text, x, y, width, height,inactive_color, active_color, action = None
     
     if x + width > cur[0] > x and y + height > cur[1] > y:
         pygame.draw.rect(gameDisplay, active_color, (x,y,width,height))
-        if click[0] == 1:
-            print("Button Clicked")
+        if click[0] == 1 and action != None:
+            if action == "quit":
+                pygame.quit()
+
+            if action == "controls":
+                game_controls()
+
+            if action == "play":
+                gameLoop()
+            
     else:
         pygame.draw.rect(gameDisplay, inactive_color, (x,y,width,height))
 
@@ -92,7 +126,8 @@ def pause():
                     quit()
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_c:
-                        paused = False
+                        pau
+                        sed = False
                     elif event.key == pygame.K_q:
                         pygame.quit()
                         quit()
@@ -144,16 +179,15 @@ def game_intro():
 ##        else:
 ##            pygame.draw.rect(gameDisplay, blue, (550,500,100,50))
         
-        button("Play", 150,500,100,50, red, light_red)
-        button("Controls", 350,500,100,50,yellow, light_green )
-        button("Quit", 550,500,100,50, blue, light_blue)
+        button("Play", 150,500,100,50, red, light_red, action="play")
+        button("Controls", 350,500,100,50,yellow, light_green, action="controls" )
+        button("Quit", 550,500,100,50, blue, light_blue, action="quit")
 
 
         pygame.display.update()
 
         clock.tick(15)
 
-game_intro()
 
 def gameLoop():
     gameExit = False
@@ -216,5 +250,5 @@ def gameLoop():
     pygame.quit()
     quit()
 
-
+game_intro()
 gameLoop()
