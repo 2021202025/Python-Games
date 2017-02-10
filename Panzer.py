@@ -28,9 +28,6 @@ light_green = (230
 
 clock = pygame.time.Clock()
 
-mainTankX = display_width * 0.9
-mainTankY = display_height * 0.9
-
 tankWidth = 40
 tankHeight = 20
 
@@ -219,7 +216,13 @@ def gameLoop():
     gameExit = False
     gameOver = False
     FPS = 15
+
     
+    mainTankX = display_width * 0.9
+    mainTankY = display_height * 0.9
+    tankMove = 0
+
+
     while not gameExit:
         
         if gameOver == True:
@@ -250,10 +253,10 @@ def gameLoop():
 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
-                    pass
+                    tankMove = -5
                     
                 elif event.key == pygame.K_RIGHT:
-                    pass
+                    tankMove = 5
                     
                 elif event.key == pygame.K_UP:
                     pass
@@ -265,10 +268,15 @@ def gameLoop():
                 elif event.key == pygame.K_p:
                     pause()
 
+            elif event.type == pygame.KEYUP:
+                if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
+                    tankMove = 0
+                    
+
                     
 
         gameDisplay.fill(white)
-
+        mainTankX += tankMove
         tank(mainTankX,mainTankY)
         
         pygame.display.update()
