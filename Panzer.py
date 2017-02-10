@@ -72,6 +72,7 @@ def tank(x,y):
     x = int(x)
     y = int(y)
     pygame.draw.circle(gameDisplay, light_red, ((x),(y)),int(tankHeight/2))
+    pygame.draw.rect(gameDisplay, black, (x-tankHeight, y, tankWidth, tankHeight))
 
 
 def game_controls():
