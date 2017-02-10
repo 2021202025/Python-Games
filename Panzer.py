@@ -28,6 +28,12 @@ light_green = (230
 
 clock = pygame.time.Clock()
 
+mainTankX = display_width * 0.9
+mainTankY = display_height * 0.9
+
+tankWidth = 40
+tankHeight = 20
+
 smallfont = pygame.font.SysFont("comicsansms", 25)
 medfont = pygame.font.SysFont("comicsansms", 50)
 largefont = pygame.font.SysFont("comicsansms", 85)
@@ -61,6 +67,12 @@ def message_to_screen(msg,color, y_displace = 0, size = "small"):
     textSurf, textRect = text_objects(msg,color,size)
     textRect.center = (int(display_width / 2), int(display_height / 2)+y_displace)
     gameDisplay.blit(textSurf, textRect)
+
+def tank(x,y):
+    x = int(x)
+    y = int(y)
+    pygame.draw.circle(gameDisplay, light_red, ((x),(y)),int(tankHeight/2))
+
 
 def game_controls():
     
@@ -246,6 +258,8 @@ def gameLoop():
                     
 
         gameDisplay.fill(white)
+
+        tank(mainTankX,mainTankY)
         
         pygame.display.update()
         
