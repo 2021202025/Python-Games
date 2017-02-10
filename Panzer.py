@@ -78,16 +78,19 @@ def game_controls():
         message_to_screen("Fire: Spacebar",black,-30)
         message_to_screen("Move Turret: Up and Down Arrows",black,10)
         message_to_screen("Move Tank: Left and right Arrows",black,50)
-        message_to_screen("Pause: P",black,80)
+        message_to_screen("Pause: P",black,90)
 
         button("Play", 150,500,100,50, red, light_red, action="play")
-        button("Controls", 350,500,100,50,yellow, light_green, action="controls" )
+        #button("Main", 350,500,100,50,yellow, light_green, action="main")
         button("Quit", 550,500,100,50, blue, light_blue, action="quit")
 
+        
 
         pygame.display.update()
 
         clock.tick(15)
+
+
 def button(text, x, y, width, height,inactive_color, active_color, action = None):
     cur = pygame.mouse.get_pos()
 
@@ -105,6 +108,7 @@ def button(text, x, y, width, height,inactive_color, active_color, action = None
 
             if action == "play":
                 gameLoop()
+
             
     else:
         pygame.draw.rect(gameDisplay, inactive_color, (x,y,width,height))
