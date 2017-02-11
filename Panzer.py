@@ -71,10 +71,32 @@ def message_to_screen(msg,color, y_displace = 0, size = "small"):
 def tank(x,y):
     x = int(x)
     y = int(y)
+
+    possibleTurrets = [(x-27, y-2),
+                       (x-26, y-5),
+                       (x-25, y-8),
+                       (x-23, y-12),
+                       (x-20, y-14),
+                       (x-18, y-15),
+                       (x-15, y-17),
+                       (x-13, y-19),
+                       (x-11, y-21)
+                       ]
+
+
+    
     pygame.draw.circle(gameDisplay, black, ((x),(y)),int(tankHeight/2))
     pygame.draw.rect(gameDisplay, black, (x-tankHeight, y, tankWidth, tankHeight))
     
-    pygame.draw.line(gameDisplay, black, (x,y), (x-15, y-20), turretWidth)
+    pygame.draw.line(gameDisplay, black, (x,y), possibleTurrets[0], turretWidth)
+    pygame.draw.line(gameDisplay, black, (x,y), possibleTurrets[1], turretWidth)
+    pygame.draw.line(gameDisplay, black, (x,y), possibleTurrets[2], turretWidth)
+    pygame.draw.line(gameDisplay, black, (x,y), possibleTurrets[3], turretWidth)
+    pygame.draw.line(gameDisplay, black, (x,y), possibleTurrets[4], turretWidth)
+    pygame.draw.line(gameDisplay, black, (x,y), possibleTurrets[5], turretWidth)
+    pygame.draw.line(gameDisplay, black, (x,y), possibleTurrets[6], turretWidth)
+    pygame.draw.line(gameDisplay, black, (x,y), possibleTurrets[7], turretWidth)
+    pygame.draw.line(gameDisplay, black, (x,y), possibleTurrets[8], turretWidth)         
 
     startX = 15
     for z in range(7):
