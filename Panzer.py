@@ -186,11 +186,12 @@ def pause():
 def barrier():
     xlocation = (display_width/2) + random.randint(-0.2*display_width, 0.2*display_width)
     print(xlocation)
-    randomHeight = random.randrange(display_height*0.1, display_height*0.6)
+    randomHeight = random.randrange(display_height*0.1, display_height*0.5)
     print(randomHeight)
 
-for x in range(25):
-    barrier()
+    pygame.draw.rect(gameDisplay, black, [xlocation, display_height-randomHeight, 50, randomHeight])
+    
+
 
 def game_intro():
 
@@ -324,6 +325,9 @@ def gameLoop():
             currentTurPos = 0
         
         tank(mainTankX,mainTankY,currentTurPos)
+
+        for x in range(1):
+            barrier()
         
         pygame.display.update()
         
