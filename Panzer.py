@@ -89,19 +89,15 @@ def tank(x,y,turPos):
     pygame.draw.rect(gameDisplay, black, (x-tankHeight, y, tankWidth, tankHeight))
     
     pygame.draw.line(gameDisplay, black, (x,y), possibleTurrets[turPos], turretWidth)
-##    pygame.draw.line(gameDisplay, black, (x,y), possibleTurrets[1], turretWidth)
-##    pygame.draw.line(gameDisplay, black, (x,y), possibleTurrets[2], turretWidth)
-##    pygame.draw.line(gameDisplay, black, (x,y), possibleTurrets[3], turretWidth)
-##    pygame.draw.line(gameDisplay, black, (x,y), possibleTurrets[4], turretWidth)
-##    pygame.draw.line(gameDisplay, black, (x,y), possibleTurrets[5], turretWidth)
-##    pygame.draw.line(gameDisplay, black, (x,y), possibleTurrets[6], turretWidth)
-##    pygame.draw.line(gameDisplay, black, (x,y), possibleTurrets[7], turretWidth)
-##    pygame.draw.line(gameDisplay, black, (x,y), possibleTurrets[8], turretWidth)         
+
 
     startX = 15
+    
     for z in range(7):
         pygame.draw.circle(gameDisplay, black, (x-startX, y+20), wheelWidth)
         startX -= 5
+
+    return possibleTurrets[turPos]
         
 def game_controls():
     
@@ -187,7 +183,17 @@ def barrier(xlocation,randomHeight,barrier_width):
 
     pygame.draw.rect(gameDisplay, black, [xlocation, display_height-randomHeight, barrier_width, randomHeight])
     
+def fireShell(xy):
+    fire = True
 
+    startingShell = xy
+    print("FIRE",xy)
+
+    while fire:
+        fire = False
+
+
+    
 
 def game_intro():
 
@@ -262,6 +268,8 @@ def gameLoop():
 
 
     while not gameExit:
+        gameDisplay.fill(white)
+        gun = tank(mainTankX,mainTankY,currentTurPos)
         
         if gameOver == True:
             #gameDisplay.fill(white)
@@ -306,6 +314,9 @@ def gameLoop():
                 elif event.key == pygame.K_p:
                     pause()
 
+                elif event.key == pygame.K_SPACE:
+                    fireShell(gun)
+
             elif event.type == pygame.KEYUP:
                 if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
                     tankMove = 0
@@ -316,7 +327,6 @@ def gameLoop():
 
                     
 
-        gameDisplay.fill(white)
         mainTankX += tankMove
 
         currentTurPos += changeTur
@@ -326,17 +336,17 @@ def gameLoop():
         elif currentTurPos < 0:
             currentTurPos = 0
 
-##        if mainTankX - (tankWidth/2) < xlocation + barrier_width:
-##            mainTankX += 5 
+        if mainTankX - (tankWidth/2) < xlocation + barrier_width:
+            mainTankX += 5 
 
 
 
-        if mainTankX-int(tankWidth/2.0) < xlocation+barrier_width:
-            mainTankX = xlocation+int(tankWidth/2.0)+barrier_width
-        elif mainTankX+int(tankWidth/2.0) > display_width:
-            mainTankX = display_width-int(tankWidth/2.0)﻿
+##        if mainTankX-int(tankWidth/2.0) < xlocation+barrier_width:
+##            mainTankX = xlocation+int(tankWidth/2.0)+barrier_width
+##        elif mainTankX+int(tankWidth/2.0) > display_width:
+##            mainTankX = display_width-int(tankWidth/2.0)﻿
         
-        tank(mainTankX,mainTankY,currentTurPos)
+
 
         barrier(xlocation,randomHeight,barrier_width)
         
