@@ -307,6 +307,12 @@ def gameLoop():
         mainTankX += tankMove
 
         currentTurPos += changeTur
+
+        if currentTurPos > 8:
+            currentTurPos = 8
+        elif currentTurPos < 0:
+            currentTurPos = 0
+        
         tank(mainTankX,mainTankY,currentTurPos)
         
         pygame.display.update()
