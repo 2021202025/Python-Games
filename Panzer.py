@@ -182,6 +182,16 @@ def pause():
         clock.tick(5)
 
 
+
+def barrier():
+    xlocation = (display_width/2) + random.randint(-0.2*display_width, 0.2*display_width)
+    print(xlocation)
+    randomHeight = random.randrange(display_height*0.1, display_height*0.6)
+    print(randomHeight)
+
+for x in range(25):
+    barrier()
+
 def game_intro():
 
     intro = True
