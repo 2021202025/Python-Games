@@ -68,7 +68,7 @@ def message_to_screen(msg,color, y_displace = 0, size = "small"):
     textRect.center = (int(display_width / 2), int(display_height / 2)+y_displace)
     gameDisplay.blit(textSurf, textRect)
 
-def tank(x,y):
+def tank(x,y,turPos):
     x = int(x)
     y = int(y)
 
@@ -88,15 +88,15 @@ def tank(x,y):
     pygame.draw.circle(gameDisplay, black, ((x),(y)),int(tankHeight/2))
     pygame.draw.rect(gameDisplay, black, (x-tankHeight, y, tankWidth, tankHeight))
     
-    pygame.draw.line(gameDisplay, black, (x,y), possibleTurrets[0], turretWidth)
-    pygame.draw.line(gameDisplay, black, (x,y), possibleTurrets[1], turretWidth)
-    pygame.draw.line(gameDisplay, black, (x,y), possibleTurrets[2], turretWidth)
-    pygame.draw.line(gameDisplay, black, (x,y), possibleTurrets[3], turretWidth)
-    pygame.draw.line(gameDisplay, black, (x,y), possibleTurrets[4], turretWidth)
-    pygame.draw.line(gameDisplay, black, (x,y), possibleTurrets[5], turretWidth)
-    pygame.draw.line(gameDisplay, black, (x,y), possibleTurrets[6], turretWidth)
-    pygame.draw.line(gameDisplay, black, (x,y), possibleTurrets[7], turretWidth)
-    pygame.draw.line(gameDisplay, black, (x,y), possibleTurrets[8], turretWidth)         
+    pygame.draw.line(gameDisplay, black, (x,y), possibleTurrets[turPos], turretWidth)
+##    pygame.draw.line(gameDisplay, black, (x,y), possibleTurrets[1], turretWidth)
+##    pygame.draw.line(gameDisplay, black, (x,y), possibleTurrets[2], turretWidth)
+##    pygame.draw.line(gameDisplay, black, (x,y), possibleTurrets[3], turretWidth)
+##    pygame.draw.line(gameDisplay, black, (x,y), possibleTurrets[4], turretWidth)
+##    pygame.draw.line(gameDisplay, black, (x,y), possibleTurrets[5], turretWidth)
+##    pygame.draw.line(gameDisplay, black, (x,y), possibleTurrets[6], turretWidth)
+##    pygame.draw.line(gameDisplay, black, (x,y), possibleTurrets[7], turretWidth)
+##    pygame.draw.line(gameDisplay, black, (x,y), possibleTurrets[8], turretWidth)         
 
     startX = 15
     for z in range(7):
@@ -244,6 +244,9 @@ def gameLoop():
     mainTankY = display_height * 0.9
     tankMove = 0
 
+    currentTurPos = 0
+    changeTur = 0
+
 
     while not gameExit:
         
@@ -281,11 +284,11 @@ def gameLoop():
                     tankMove = 5
                     
                 elif event.key == pygame.K_UP:
-                    pass
+                    changeTur = 1
                     
                     
                 elif event.key == pygame.K_DOWN:
-                    pass
+                    changeTur = -1
 
                 elif event.key == pygame.K_p:
                     pause()
@@ -293,13 +296,18 @@ def gameLoop():
             elif event.type == pygame.KEYUP:
                 if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
                     tankMove = 0
+
+                if event.key == pygame.K_UP or event.key == pygame.K_DOWN:
+                    changeTur = 0
                     
 
                     
 
         gameDisplay.fill(white)
         mainTankX += tankMove
-        tank(mainTankX,mainTankY)
+
+        currentTurPos += changeTur
+        tank(mainTankX,mainTankY,currentTurPos)
         
         pygame.display.update()
         
