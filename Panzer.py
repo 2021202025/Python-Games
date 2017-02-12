@@ -201,10 +201,15 @@ def fireShell(xy,tankx,tanky,turPos):
         print(startingShell[0],startingShell[1])
         pygame.draw.circle(gameDisplay, red, (startingShell[0],startingShell[1]),5)
 
-        startingShell[0] -= 5
+        startingShell[0] -= (12 - turPos)*2
+    # y = x**2
+        startingShell[1] += int((((startingShell[0] - xy[0]) *0.01)**2) - (turPos+turPos/(12-turPos)))
+
+        if startingShell[1] > display_height:
+            fire = False
 
         pygame.display.update()
-        clock.tick(5)
+        clock.tick(30)
 
     
 
