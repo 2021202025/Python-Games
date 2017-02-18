@@ -212,7 +212,7 @@ def barrier(xlocation,randomHeight,barrier_width):
 ##        clock.tick(30)
 
 
-def explosion(x,y):
+def explosion(x,y, size=50):
 
     explode = True
 
@@ -228,7 +228,7 @@ def explosion(x,y):
 
          magnitude = 1
 
-         while magnitude < 50:
+         while magnitude < size:
 
              exploding_bit_x = x + random.randrange(-1*magnitude, magnitude)
              exploding_bit_y = y + random.randrange(-1*magnitude, magnitude)
@@ -360,8 +360,7 @@ def gameLoop():
 
 
     while not gameExit:
-        gameDisplay.fill(white)
-        gun = tank(mainTankX,mainTankY,currentTurPos)
+        
         
         if gameOver == True:
             #gameDisplay.fill(white)
@@ -442,6 +441,9 @@ def gameLoop():
 
         if mainTankX - (tankWidth/2) < xlocation + barrier_width:
             mainTankX += 5 
+
+        gameDisplay.fill(white)
+        gun = tank(mainTankX,mainTankY,currentTurPos)
 
         fire_power += power_change
 
