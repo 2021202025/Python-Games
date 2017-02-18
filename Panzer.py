@@ -212,6 +212,36 @@ def barrier(xlocation,randomHeight,barrier_width):
 ##        clock.tick(30)
 
 
+def explosion(x,y):
+
+    explode = True
+
+    while explode:
+         for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+
+         startPoint = x,y
+
+         colorChoices = [red, light_red, yellow]
+
+         magnitude = 1
+
+         while magnitude < 50:
+
+             exploding_bit_x = x + random.randrange(-1*magnitude, magnitude)
+             exploding_bit_y = y + random.randrange(-1*magnitude, magnitude)
+        
+             pygame.draw.circle(gameDisplay, colorChoices[random.randrange(0,3)], (exploding_bit_x,exploding_bit_y), random.randrange(1,4))
+             magnitude += 1
+
+             pygame.display.update()
+             clock.tick(60)
+
+         explode = False
+
+
 def fireShell2(xy,tankx,tanky,turPos,gun_power):
     fire = True
 
@@ -240,6 +270,8 @@ def fireShell2(xy,tankx,tanky,turPos,gun_power):
             hit_y = int(display_height)
 
             print("Impact: ",hit_x,hit_y)
+
+            explosion(hit_x,hit_y)
             
             fire = False
 
