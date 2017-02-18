@@ -28,7 +28,7 @@ light_green = (230
 
 clock = pygame.time.Clock()
 
-tankWidth = 40
+tankWidth = 50
 tankHeight = 20
 
 turretWidth = 6
@@ -96,7 +96,7 @@ def tank(x,y,turPos):
 
     startX = 15
     
-    for z in range(7):
+    for z in range(9):
         pygame.draw.circle(gameDisplay, black, (x-startX, y+20), wheelWidth)
         startX -= 5
 
