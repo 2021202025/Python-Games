@@ -34,6 +34,9 @@ tankHeight = 20
 turretWidth = 6
 wheelWidth = 5
 
+ground_height = 35
+
+
 smallfont = pygame.font.SysFont("comicsansms", 25)
 medfont = pygame.font.SysFont("comicsansms", 50)
 largefont = pygame.font.SysFont("comicsansms", 85)
@@ -263,11 +266,11 @@ def fireShell2(xy,tankx,tanky,turPos,gun_power,xlocation,barrier_width,randomHei
     # y = x**2
         startingShell[1] += int((((startingShell[0] - xy[0]) *0.015/(gun_power/50))**2) - (turPos+turPos/(12-turPos)))
 
-        if startingShell[1] > display_height:
+        if startingShell[1] > display_height-ground_height:
             
             print("Last Shell: ",startingShell[0],startingShell[1])
-            hit_x = int((startingShell[0]*display_height)/startingShell[1])
-            hit_y = int(display_height)
+            hit_x = int((startingShell[0]*display_height-ground_height)/startingShell[1])
+            hit_y = int(display_height-ground_height)
             print("Impact: ",hit_x,hit_y)
             explosion(hit_x,hit_y)
             
@@ -291,7 +294,7 @@ def fireShell2(xy,tankx,tanky,turPos,gun_power,xlocation,barrier_width,randomHei
             
 
         pygame.display.update()
-        clock.tick(30)
+        clock.tick(60)
     
 def power(level):
     text = smallfont.render("Power: "+str(level)+"%", True,black)
@@ -473,6 +476,7 @@ def gameLoop():
 
 
         barrier(xlocation,randomHeight,barrier_width)
+        gameDisplay.fill(green, rect=[0, display_height-ground_height, display_width, ground_height])
         
         pygame.display.update()
         
