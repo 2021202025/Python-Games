@@ -279,7 +279,7 @@ def explosion(x,y, size=50):
          explode = False
 
 
-def fireShell2(xy,tankx,tanky,turPos,gun_power,xlocation,barrier_width,randomHeight):
+def fireShell2(xy,tankx,tanky,turPos,gun_power,xlocation,barrier_width,randomHeight,tank="enemy"):
     fire = True
 
     startingShell = list(xy)
@@ -296,7 +296,11 @@ def fireShell2(xy,tankx,tanky,turPos,gun_power,xlocation,barrier_width,randomHei
         print(startingShell[0],startingShell[1])
         pygame.draw.circle(gameDisplay, green, (startingShell[0],startingShell[1]),5)
 
-        startingShell[0] -= (12 - turPos)*2
+        if tank == "enemy":
+            startingShell[0] += (12 - turPos)
+        else:
+            startingShell[0] -= (12 - turPos)*2
+            
     # y = x**2
         startingShell[1] += int((((startingShell[0] - xy[0]) *0.015/(gun_power/50))**2) - (turPos+turPos/(12-turPos)))
 
