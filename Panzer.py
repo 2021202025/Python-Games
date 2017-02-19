@@ -279,7 +279,7 @@ def explosion(x,y, size=50):
          explode = False
 
 
-def fireShell2(xy,tankx,tanky,turPos,gun_power,xlocation,barrier_width,randomHeight,tank="enemy"):
+def fireShell(xy,tankx,tanky,turPos,gun_power,xlocation,barrier_width,randomHeight,tank="player"):
     fire = True
 
     startingShell = list(xy)
@@ -465,8 +465,8 @@ def gameLoop():
                     pause()
 
                 elif event.key == pygame.K_SPACE:
-                    #fireShell(gun,mainTankX,mainTankY,currentTurPos,fire_power)
-                    fireShell2(gun,mainTankX,mainTankY,currentTurPos,fire_power,xlocation,barrier_width,randomHeight)
+                    fireShell(gun,mainTankX,mainTankY,currentTurPos,fire_power,xlocation,barrier_width,randomHeight)
+                    fireShell(enemy_gun,enemyTankX,enemyTankY,7,50,xlocation,barrier_width,randomHeight, tank = "enemy")
                     
                 elif event.key == pygame.K_a:
                     power_change = -1
