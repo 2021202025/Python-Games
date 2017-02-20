@@ -24,6 +24,8 @@ blue = (0,0,255)
 light_blue = (0,100,255)
 light_red = (255,66,0)
 light_green = (230,255,0)
+orange = (255, 167, 79)
+sky_blue = (91, 222, 255)
 
 clock = pygame.time.Clock()
 
@@ -203,8 +205,7 @@ def pause():
                     quit()
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_c:
-                        pau
-                        sed = False
+                        paused = False
                     elif event.key == pygame.K_q:
                         pygame.quit()
                         quit()
@@ -278,19 +279,19 @@ def fireShell(xy,tankx,tanky,turPos,gun_power,xlocation,barrier_width,randomHeig
             print("Impact: ",hit_x,hit_y)
             explosion(hit_x,hit_y)
 
-            if enemyTankX + 10 > hit_x > enemyTankX - 10:
+            if enemyTankX + 15 > hit_x > enemyTankX - 15:
                 print("Critical Hit !!")
                 damage = 25
 
-            if enemyTankX + 15 > hit_x > enemyTankX - 15:
+            if enemyTankX + 20 > hit_x > enemyTankX - 20:
                 print("Hard Hit !!")
                 damage = 18
 
-            if enemyTankX + 25 > hit_x > enemyTankX - 25:
+            if enemyTankX + 30 > hit_x > enemyTankX - 30:
                 print("Medium Hit !!")
                 damage = 10
                 
-            if enemyTankX + 35 > hit_x > enemyTankX - 35:
+            if enemyTankX + 40 > hit_x > enemyTankX - 40:
                 print("Light Hit !!")
                 damage = 5
             
@@ -390,7 +391,7 @@ def e_fireShell(xy,tankx,tanky,turPos,gun_power,xlocation,barrier_width,randomHe
 
         # y = x**2
 
-        gun_power = random.randrange(int(currentPower*0.90), int(currentPower*1.10))
+        gun_power = random.randrange(int(currentPower*0.80), int(currentPower*1.20))
         startingShell[1] += int((((startingShell[0]-xy[0])*0.015/(gun_power/50))**2) - (turPos+turPos/(12-turPos)))
 
         if startingShell[1] > display_height-ground_height:
@@ -455,7 +456,7 @@ def game_over():
                     pygame.quit()
                     quit()
 
-        gameDisplay.fill(white)
+        gameDisplay.fill(sky_blue)
         
         message_to_screen("Game Over!",green,-100,size="large")
         message_to_screen("You Died",black,0, size = "medium")
@@ -480,7 +481,7 @@ def you_win():
                     pygame.quit()
                     quit()
 
-        gameDisplay.fill(white)
+        gameDisplay.fill(sky_blue)
         
         message_to_screen(" You Won!",green,-100,size="large")
         message_to_screen("Congratulations!",black,0, size = "medium")
@@ -513,11 +514,12 @@ def game_intro():
                         pygame.quit()
                         quit()
 
-        gameDisplay.fill(white)
-        message_to_screen("Welcome to Tanks!",green,-100,size="large")
-        message_to_screen("The objective is to shoot and destroy",black,-30)
-        message_to_screen("the enemy tank before they destroy you.",black,10)
-        message_to_screen("The more enemies you destroy, the harder they get.",black,50)
+        gameDisplay.fill(sky_blue)
+        message_to_screen("Welcome to Tanks!",black,-220,size="large")
+        message_to_screen("The objective is to shoot and destroy",black,-130)
+        message_to_screen("the enemy tank before they destroy you.",black,-90)
+        message_to_screen("The Horrors of WWII Await,",black,-10, size="medium")
+        message_to_screen("TWill you take the CHARGE?",black,60,size="medium")
         #message_to_screen("Press C to play, P to pause or Q to quit",black,180)
 
 ##        cur = pygame.mouse.get_pos()
@@ -659,7 +661,7 @@ def gameLoop():
                             elif possibleMovement[moveIndex] == "r":
                                 enemyTankX -= 5
 
-                            gameDisplay.fill(white)
+                            gameDisplay.fill(sky_blue)
                             health_bars(player_health, enemy_health)
                             gun = tank(mainTankX,mainTankY,currentTurPos)
                             enemy_gun = enemy_tank(enemyTankX,enemyTankY,7)
@@ -713,7 +715,7 @@ def gameLoop():
         if mainTankX - (tankWidth/2) < xlocation + barrier_width:
             mainTankX += 5 
 
-        gameDisplay.fill(white)
+        gameDisplay.fill(sky_blue)
         health_bars(player_health, enemy_health)
         gun = tank(mainTankX,mainTankY,currentTurPos)
         enemy_gun = enemy_tank(enemyTankX,enemyTankY,7)
