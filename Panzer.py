@@ -648,6 +648,35 @@ def gameLoop():
                 elif event.key == pygame.K_SPACE:
                     damage = fireShell(gun,mainTankX,mainTankY,currentTurPos,fire_power,xlocation,barrier_width,randomHeight,enemyTankX,enemyTankY)
                     enemy_health -= damage
+
+                    possibleMovement = ['f', 'r']
+                    moveIndex = random.randrange(0,2)
+
+                    for x in range(random.randrange(0,10)):
+                        if display_width * 0.3 > enemyTankX > display_width * 0.03:
+                            if possibleMovement[moveIndex] == "f":
+                                enemyTankX += 5
+                            elif possibleMovement[moveIndex] == "r":
+                                enemyTankX -= 5
+
+                            gameDisplay.fill(white)
+                            health_bars(player_health, enemy_health)
+                            gun = tank(mainTankX,mainTankY,currentTurPos)
+                            enemy_gun = enemy_tank(enemyTankX,enemyTankY,7)
+
+                            fire_power += power_change
+
+                            power(fire_power)
+
+
+                            barrier(xlocation,randomHeight,barrier_width)
+                            gameDisplay.fill(green, rect=[0, display_height-ground_height, display_width, ground_height])
+                                    
+                            pygame.display.update()
+
+                            clock.tick(FPS)
+
+                    
                     damage = e_fireShell(enemy_gun,enemyTankX,enemyTankY,7,50,xlocation,barrier_width,randomHeight,mainTankX,mainTankY)
                     player_health -= damage
                     
@@ -692,13 +721,6 @@ def gameLoop():
         fire_power += power_change
 
         power(fire_power)
-
-
-##        if mainTankX-int(tankWidth/2.0) < xlocation+barrier_width:
-##            mainTankX = xlocation+int(tankWidth/2.0)+barrier_width
-##        elif mainTankX+int(tankWidth/2.0) > display_width:
-##            mainTankX = display_width-int(tankWidth/2.0)﻿
-        
 
 
         barrier(xlocation,randomHeight,barrier_width)
