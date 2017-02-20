@@ -278,9 +278,21 @@ def fireShell(xy,tankx,tanky,turPos,gun_power,xlocation,barrier_width,randomHeig
             print("Impact: ",hit_x,hit_y)
             explosion(hit_x,hit_y)
 
-            if enemyTankX + 15 > hit_x > enemyTankX - 15:
-                print("Target Hit !!")
+            if enemyTankX + 10 > hit_x > enemyTankX - 10:
+                print("Critical Hit !!")
                 damage = 25
+
+            if enemyTankX + 15 > hit_x > enemyTankX - 15:
+                print("Hard Hit !!")
+                damage = 18
+
+            if enemyTankX + 25 > hit_x > enemyTankX - 25:
+                print("Medium Hit !!")
+                damage = 10
+                
+            if enemyTankX + 35 > hit_x > enemyTankX - 35:
+                print("Light Hit !!")
+                damage = 5
             
             fire = False
 
@@ -377,7 +389,9 @@ def e_fireShell(xy,tankx,tanky,turPos,gun_power,xlocation,barrier_width,randomHe
 
 
         # y = x**2
-        startingShell[1] += int((((startingShell[0]-xy[0])*0.015/(currentPower/50))**2) - (turPos+turPos/(12-turPos)))
+
+        gun_power = random.randrange(int(currentPower*0.90), int(currentPower*1.10))
+        startingShell[1] += int((((startingShell[0]-xy[0])*0.015/(gun_power/50))**2) - (turPos+turPos/(12-turPos)))
 
         if startingShell[1] > display_height-ground_height:
             print("last shell:",startingShell[0],startingShell[1])
@@ -385,9 +399,22 @@ def e_fireShell(xy,tankx,tanky,turPos,gun_power,xlocation,barrier_width,randomHe
             hit_y = int(display_height-ground_height)
             print("Impact:",hit_x,hit_y)
 
-            if ptankx + 15 > hit_x > ptankx - 15:
-                print("Target Hit!")
+
+            if ptankx + 10 > hit_x > ptankx - 10:
+                print("Critical Hit !!")
                 damage = 25
+
+            elif ptankx + 15 > hit_x > ptankx - 15:
+                print("Hard Hit !!")
+                damage = 18
+
+            elif ptankx + 25 > hit_x > ptankx - 25:
+                print("Medium Hit !!")
+                damage = 10
+                
+            elif ptankx + 35 > hit_x > ptankx - 35:
+                print("Light Hit !!")
+                damage = 5
                 
             explosion(hit_x,hit_y)
             fire = False
