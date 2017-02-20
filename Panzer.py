@@ -23,8 +23,7 @@ yellow = (255,242,0)
 blue = (0,0,255)
 light_blue = (0,100,255)
 light_red = (255,66,0)
-light_green = (230
-               ,255,0)
+light_green = (230,255,0)
 
 clock = pygame.time.Clock()
 
@@ -419,6 +418,56 @@ def power(level):
 
 
 
+def game_over():
+
+    game_over = True
+
+    while game_over:
+        for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    quit()
+
+        gameDisplay.fill(white)
+        
+        message_to_screen("Game Over!",green,-100,size="large")
+        message_to_screen("You Died",black,0, size = "medium")
+
+        button("Play", 150,500,100,50, red, light_red, action="play")
+        button("Controls", 350,500,100,50,yellow, light_green, action="controls" )
+        button("Quit", 550,500,100,50, blue, light_blue, action="quit")
+
+
+        pygame.display.update()
+
+        clock.tick(15)
+
+
+def you_win():
+
+    win = True
+
+    while win:
+        for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    quit()
+
+        gameDisplay.fill(white)
+        
+        message_to_screen(" You Won!",green,-100,size="large")
+        message_to_screen("Congratulations!",black,0, size = "medium")
+
+        button("Play", 150,500,100,50, red, light_red, action="play")
+        button("Controls", 350,500,100,50,yellow, light_green, action="controls" )
+        button("Quit", 550,500,100,50, blue, light_blue, action="quit")
+
+
+        pygame.display.update()
+
+        clock.tick(15)
+
+
 def game_intro():
 
     intro = True
@@ -469,6 +518,7 @@ def game_intro():
         pygame.display.update()
 
         clock.tick(15)
+
 
 
 def health_bars(player_health, enemy_health):
@@ -628,6 +678,12 @@ def gameLoop():
         gameDisplay.fill(green, rect=[0, display_height-ground_height, display_width, ground_height])
         
         pygame.display.update()
+
+        if player_health < 1:
+            game_over()
+
+        elif enemy_health < 1:
+            you_win()
         
         clock.tick(FPS)
 
