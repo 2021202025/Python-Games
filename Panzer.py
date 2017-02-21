@@ -283,23 +283,24 @@ def fireShell(xy,tankx,tanky,turPos,gun_power,xlocation,barrier_width,randomHeig
             hit_x = int((startingShell[0]*display_height-ground_height)/startingShell[1])
             hit_y = int(display_height-ground_height)
             print("Impact: ",hit_x,hit_y)
-            explosion(hit_x,hit_y)
 
             if enemyTankX + 15 > hit_x > enemyTankX - 15:
                 print("Critical Hit !!")
                 damage = 25
 
-            if enemyTankX + 20 > hit_x > enemyTankX - 20:
+            elif enemyTankX + 20 > hit_x > enemyTankX - 20:
                 print("Hard Hit !!")
                 damage = 18
 
-            if enemyTankX + 30 > hit_x > enemyTankX - 30:
+            elif enemyTankX + 30 > hit_x > enemyTankX - 30:
                 print("Medium Hit !!")
                 damage = 10
                 
-            if enemyTankX + 40 > hit_x > enemyTankX - 40:
+            elif enemyTankX + 40 > hit_x > enemyTankX - 40:
                 print("Light Hit !!")
                 damage = 5
+                
+            explosion(hit_x,hit_y)
             
             fire = False
 
@@ -524,27 +525,11 @@ def game_intro():
         gameDisplay.fill(sky_blue)
         message_to_screen("Welcome to Tanks!",black,-220,size="large")
         message_to_screen("The objective is to shoot and destroy",black,-130)
-        message_to_screen("the enemy tank before they destroy you.",black,-90)
+        #message_to_screen("the enemy tank before they destroy you.",black,-90)
         message_to_screen("The Horrors of WWII Await,",black,-10, size="medium")
-        message_to_screen("TWill you take the CHARGE?",black,60,size="medium")
+        message_to_screen("Will you take the CHARGE?",black,60,size="medium")
         #message_to_screen("Press C to play, P to pause or Q to quit",black,180)
 
-##        cur = pygame.mouse.get_pos()
-##
-##        if 150+100 > cur[0] > 150 and 500+50 > cur[1] > 500:
-##            pygame.draw.rect(gameDisplay, light_red, (150,500,100,50))
-##        else:
-##            pygame.draw.rect(gameDisplay, red, (150,500,100,50))
-##
-##        if 350+100 > cur[0] > 350 and 500+50 > cur[1] > 500:
-##            pygame.draw.rect(gameDisplay, light_green, (350,500,100,50))
-##        else:
-##            pygame.draw.rect(gameDisplay, yellow, (350,500,100,50))
-##        
-##        if 550+100 > cur[0] > 550 and 500+50 > cur[1] >500:
-##            pygame.draw.rect(gameDisplay, light_blue, (550,500,100,50))
-##        else:
-##            pygame.draw.rect(gameDisplay, blue, (550,500,100,50))
         
         button("Play", 150,500,100,50, red, light_red, action="play")
         button("Controls", 350,500,100,50,yellow, light_green, action="controls" )
@@ -602,9 +587,9 @@ def gameLoop():
     fire_power = 50
     power_change = 0
 
-    xlocation = (display_width/2) + random.randint(-0.2*display_width, 0.2*display_width)
+    xlocation = (display_width/2) + random.randint(-0.1*display_width, 0.1*display_width)
    
-    randomHeight = random.randrange(display_height*0.1, display_height*0.5)
+    randomHeight = random.randrange(display_height*0.1, display_height*0.4)
     
 
 
@@ -728,6 +713,11 @@ def gameLoop():
         enemy_gun = enemy_tank(enemyTankX,enemyTankY,7)
 
         fire_power += power_change
+
+        if fire_power > 100:
+            fire_power = 100
+        elif fire_power < 1:
+            fire_power = 1
 
         power(fire_power)
 
