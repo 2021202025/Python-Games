@@ -14,8 +14,8 @@ explosion_sound = pygame.mixer.Sound("Explosion.wav")
 
 pygame.display.set_caption('Tanks')
 
-#icon = pygame.image.load("apple.png")       
-#pygame.display.set_icon(icon)
+icon = pygame.image.load('Tankicon.png')
+pygame.display.set_icon(icon)
 
 white = (255,255,255)
 black = (0,0,0)
