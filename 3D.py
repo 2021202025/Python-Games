@@ -9,7 +9,7 @@ display_height = 600
 
 gameDisplay = pygame.display.set_mode((display_width,display_height))
 
-pygame.display.set_caption('3d')
+pygame.display.set_caption('3D')
 
 white = (255,255,255)
 black = (0,0,0)
@@ -30,6 +30,7 @@ medfont = pygame.font.SysFont("comicsansms", 50)
 largefont = pygame.font.SysFont("comicsansms", 85)
 
 FPS = 30
+
 
 
 def square(startPoint, fullSize):
