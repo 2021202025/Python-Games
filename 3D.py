@@ -86,9 +86,11 @@ def gameLoop():
 
                 elif event.key == pygame.K_UP:
                     z_move = -5
+                    current_move = -1
                     
                 elif event.key == pygame.K_DOWN:
                     z_move = 5
+                    current_move = 1
 
 
             elif event.type == pygame.KEYUP:
@@ -96,7 +98,8 @@ def gameLoop():
                     current_move = 0
 
                 if event.key == pygame.K_UP or event.key == pygame.K_DOWN:
-                    pass
+                    z_move = 0
+                    current_move = 0
 
         gameDisplay.fill(black)
 
