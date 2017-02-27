@@ -39,6 +39,12 @@ def square(startPoint, fullSize):
     node_3 = [startPoint[0], startPoint[1]+fullSize]
     node_4 = [startPoint[0]+fullSize, startPoint[1]+fullSize]
 
+    offset = int(fullSize / 2)
+    node_5 = [node_1[0]+offset, node_1[1]-offset]
+    node_6 = [node_2[0]+offset, node_2[1]-offset]
+    node_7 = [node_3[0]+offset, node_3[1]-offset]
+    node_8 = [node_4[0]+offset, node_4[1]-offset]
+
     # top line #
     pygame.draw.line(gameDisplay, white, (node_1),(node_2))
     # bottom line #
@@ -49,13 +55,38 @@ def square(startPoint, fullSize):
     pygame.draw.line(gameDisplay, white, (node_2),(node_4))
 
 
+    # top line #
+    pygame.draw.line(gameDisplay, white, (node_5),(node_6))
+    # bottom line #
+    pygame.draw.line(gameDisplay, white, (node_7),(node_8))
+    # left line #
+    pygame.draw.line(gameDisplay, white, (node_5),(node_7))
+    # right line #
+    pygame.draw.line(gameDisplay, white, (node_6),(node_8))
+
+
     pygame.draw.circle(gameDisplay, light_green, node_1, 5)
     pygame.draw.circle(gameDisplay, light_green, node_2, 5)
     pygame.draw.circle(gameDisplay, light_green, node_3, 5)
     pygame.draw.circle(gameDisplay, light_green, node_4, 5)
 
-
     
+    pygame.draw.circle(gameDisplay, light_green, node_5, 5)
+    pygame.draw.circle(gameDisplay, light_green, node_6, 5)
+    pygame.draw.circle(gameDisplay, light_green, node_7, 5)
+    pygame.draw.circle(gameDisplay, light_green, node_8, 5)
+
+
+
+    pygame.draw.line(gameDisplay, white, (node_1),(node_5))
+  
+    pygame.draw.line(gameDisplay, white, (node_2),(node_6))
+
+    pygame.draw.line(gameDisplay, white, (node_3),(node_7))
+
+    pygame.draw.line(gameDisplay, white, (node_4),(node_8))
+
+
     
 
 
