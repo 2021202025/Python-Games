@@ -66,6 +66,9 @@ def gameLoop():
 
     current_move = 0
 
+    z_move = 0
+    z_location = 1
+
     while True:
         
         for event in pygame.event.get():
@@ -80,7 +83,13 @@ def gameLoop():
                     
                 elif event.key == pygame.K_RIGHT:
                     current_move = 5
+
+                elif event.key == pygame.K_UP:
+                    z_move = -5
                     
+                elif event.key == pygame.K_DOWN:
+                    z_move = 5
+
 
             elif event.type == pygame.KEYUP:
                 if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
@@ -91,9 +100,17 @@ def gameLoop():
 
         gameDisplay.fill(black)
 
+
+        if z_location > 200:
+            z_move = 0
+
+        z_location += z_move
+
+        current_size = int(size/(z_location*0.1))
+
         location[0] += current_move
 
-        square(location, size)
+        square(location, current_size)
         pygame.display.update()
         
         clock.tick(FPS)
