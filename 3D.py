@@ -33,7 +33,7 @@ FPS = 30
 
 
 
-def square(startPoint, fullSize):
+def cube(startPoint, fullSize):
     node_1 = [startPoint[0], startPoint[1]]
     node_2 = [startPoint[0]+fullSize, startPoint[1]]
     node_3 = [startPoint[0], startPoint[1]+fullSize]
@@ -93,12 +93,14 @@ def square(startPoint, fullSize):
 def gameLoop():
 
     location = [300,200]
-    size = 200
+    size = 100
 
     current_move = 0
 
     z_move = 0
-    z_location = 1
+    z_location = 40
+
+    y_move = 0
 
     while True:
         
@@ -116,12 +118,11 @@ def gameLoop():
                     current_move = 5
 
                 elif event.key == pygame.K_UP:
-                    z_move = -5
-                    current_move = -1
+                    y_move = -5
                     
                 elif event.key == pygame.K_DOWN:
-                    z_move = 5
-                    current_move = 1
+                    y_move = 5
+
 
 
             elif event.type == pygame.KEYUP:
@@ -129,8 +130,8 @@ def gameLoop():
                     current_move = 0
 
                 if event.key == pygame.K_UP or event.key == pygame.K_DOWN:
-                    z_move = 0
-                    current_move = 0
+                    y_move = 0
+                    #current_move = 0
 
         gameDisplay.fill(black)
 
@@ -140,11 +141,12 @@ def gameLoop():
 
         z_location += z_move
 
-        current_size = int(size/(z_location*0.1))
+        current_size = size
 
         location[0] += current_move
+        location[1] += y_move
 
-        square(location, current_size)
+        cube(location, current_size)
         pygame.display.update()
         
         clock.tick(FPS)
