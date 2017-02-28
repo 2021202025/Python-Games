@@ -44,14 +44,17 @@ def cube(startPoint, fullSize):
     x_mid = int(display_width / 2)
     x_offset = int(startPoint[0]-x_mid)
 
+    y_mid = int(display_height / 2)
+    y_offset = int(startPoint[1]-y_mid)
+
     if x_offset < -100:
         x_offset = -100
     elif x_offset > 100:
         x_offset = 100
-    node_5 = [node_1[0]+x_offset, node_1[1]-offset]
-    node_6 = [node_2[0]+x_offset, node_2[1]-offset]
-    node_7 = [node_3[0]+x_offset, node_3[1]-offset]
-    node_8 = [node_4[0]+x_offset, node_4[1]-offset]
+    node_5 = [node_1[0]+x_offset, node_1[1]-y_offset]
+    node_6 = [node_2[0]+x_offset, node_2[1]-y_offset]
+    node_7 = [node_3[0]+x_offset, node_3[1]-y_offset]
+    node_8 = [node_4[0]+x_offset, node_4[1]-y_offset]
 
     # top line #
     pygame.draw.line(gameDisplay, white, (node_1),(node_2))
